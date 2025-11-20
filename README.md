@@ -154,7 +154,10 @@ This will regenerate:
 * `vectorizer.pkl`
 
 ---
+
 <img width="1919" height="916" alt="Screenshot 2025-11-20 202248" src="https://github.com/user-attachments/assets/dfced8d6-c693-41b8-80c2-3cc1e9b928ef" />
+<img width="1912" height="910" alt="Screenshot 2025-11-20 202314" src="https://github.com/user-attachments/assets/f601a85a-7ba2-4fef-b7b1-02b790c10ab1" />
+
 ---
 # 🔮 Future Improvements
 
