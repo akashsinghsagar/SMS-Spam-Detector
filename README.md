@@ -1,128 +1,125 @@
-# 📧 SMS / Email Spam Classifier  
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)]()
-[![Streamlit](https://img.shields.io/badge/Streamlit-App-red)]()
-[![Scikit-Learn](https://img.shields.io/badge/ML-Scikit--Learn-orange)]()
-[![NLTK](https://img.shields.io/badge/NLTK-Tokenizer-yellow)]()
-[![License: MIT](https://img.shields.io/badge/License-MIT-green)]()
 
-A modern machine-learning project to classify SMS/Email messages as **Spam** or **Ham (Not Spam)** using **TF-IDF**, **NLP preprocessing**, and **Multinomial Naive Bayes**.  
-The complete model is deployed as a **Streamlit web application** for real-time predictions.
+# 📧 SMS / Email Spam Detector
 
----
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)]()
+[![Streamlit](https://img.shields.io/badge/Streamlit-Deployed-red.svg)]()
+[![Scikit-Learn](https://img.shields.io/badge/ML-Scikit--Learn-orange.svg)]()
+[![NLP](https://img.shields.io/badge/NLP-NLTK-yellow.svg)]()
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)]()
 
-# 🚀 Features
-- ✔ Clean & advanced NLP preprocessing  
-- ✔ TF-IDF vectorizer (3000 features)  
-- ✔ High-precision Multinomial Naive Bayes model  
-- ✔ Full EDA with charts & word clouds  
-- ✔ Streamlit web UI for live predictions  
-- ✔ Saved model + vectorizer for deployment  
+A lightweight yet powerful **Machine Learning + NLP system** that classifies SMS and Email text as **Spam** or **Ham (Not Spam)** using TF-IDF and Multinomial Naive Bayes.
+
+This real-time prediction system is deployed using **Streamlit Cloud** with a smooth and clean UI.
 
 ---
 
-# 🗂 Project Structure
+# 🚀 Live Demo
+
+🔗 **Streamlit Web App:**
+👉 [https://sms-spam-detector-akash.streamlit.app/](https://sms-spam-detector-akash.streamlit.app/)
+
+---
+
+# 🧠 Project Overview
+
+This project includes:
+
+✔ Fully automated NLP preprocessing
+✔ TF-IDF text vectorization (3000 features)
+✔ Highly accurate Multinomial Naive Bayes classifier
+✔ Real-time spam prediction web application
+✔ Complete training pipeline with dataset
+✔ Easy-to-run code structure
+
+---
+
+# 🗂 Repository Structure
+
 ```
-
 📦 SMS-Spam-Detector
 │
-├── app.py                     # Streamlit application
-├── vectorizer.pkl             # Trained TF-IDF vectorizer
-├── model.pkl                  # MultinomialNB trained model
-├── sms-spam-detection.ipynb   # Full ML training notebook
-├── spam.csv                   # Dataset
-├── requirements.txt
-└── README.md
-
-````
+├── app.py                        # Root-level wrapper for Streamlit Cloud
+├── sms-spam-classifier/
+│   ├── app.py                    # Main Streamlit application
+│   ├── model.pkl                 # Trained ML model
+│   ├── vectorizer.pkl            # Trained TF-IDF vectorizer
+│   ├── spam.csv                  # Dataset used for training
+│   ├── train_model.py            # Python script to train the model
+│   ├── sms-spam-detection.ipynb  # Jupyter Notebook (EDA + Training)
+│
+├── requirements.txt              # All dependencies
+└── README.md                     # Project documentation
+```
 
 ---
 
-# 🧠 Model Pipeline
+# 🧹 NLP Preprocessing Pipeline
 
-### 🔹 **1. Text Preprocessing**
-Includes:
-- Lowercasing  
-- Tokenization  
-- Removing stopwords  
-- Removing punctuation  
-- Stemming using PorterStemmer  
-
-Preprocessing function:
+* Convert text to lowercase
+* Tokenization using NLTK
+* Remove stopwords
+* Remove punctuation
+* Apply Porter Stemming
+* Return cleaned, stemmed text
 
 ```python
 def transform_text(text):
     text = text.lower()
     text = nltk.word_tokenize(text)
 
-    y = []
-    for i in text:
-        if i.isalnum():
-            y.append(i)
-
-    text = y[:]
-    y.clear()
-
-    for i in text:
-        if i not in stopwords.words('english') and i not in string.punctuation:
-            y.append(i)
-
-    text = y[:]
-    y.clear()
-
-    for i in text:
-        y.append(ps.stem(i))
+    y = [i for i in text if i.isalnum()]
+    y = [i for i in y if i not in stopwords.words('english') and i not in string.punctuation]
+    y = [ps.stem(i) for i in y]
 
     return " ".join(y)
-````
-
----
-
-### 🔹 **2. Feature Extraction**
-
-TF-IDF Vectorizer with `max_features = 3000`:
-
-```python
-tfidf = TfidfVectorizer(max_features=3000)
-X = tfidf.fit_transform(df['transformed_text']).toarray()
 ```
 
 ---
 
-### 🔹 **3. Model Training**
+# 🧠 Machine Learning Model
 
-Several ML models were tested:
+### **TF-IDF Vectorizer**
 
-| Algorithm               | Accuracy   | Precision  |
-| ----------------------- | ---------- | ---------- |
-| Multinomial Naive Bayes | **0.9806** | **0.9469** |
-| SVM                     | Good       | Moderate   |
-| Decision Tree           | Lower      | Lower      |
-| Random Forest           | High       | High       |
-| AdaBoost                | High       | Good       |
-| XGBoost                 | High       | Great      |
+* `max_features = 3000`
+* Converts text into numerical feature vectors
 
-🏆 **Multinomial Naive Bayes performed best overall.**
+### **Multinomial Naive Bayes**
 
----
+Chosen because:
 
-# 📊 Model Performance (Final Model)
-
-| Metric        | Score                  |
-| ------------- | ---------------------- |
-| **Accuracy**  | **0.9806576402321083** |
-| **Precision** | **0.946969696969697**  |
+* Excellent for text classification
+* Fast training and prediction
+* High accuracy and precision
 
 ---
 
-# 🌐 Run the Streamlit App
+# 📊 Model Performance
 
-### 🔧 Install dependencies
+| Metric        | Score     |
+| ------------- | --------- |
+| **Accuracy**  | **0.98+** |
+| **Precision** | **0.94+** |
+
+Reliable & efficient for real-world SMS/Email spam detection.
+
+---
+
+# 🌐 Running the Project Locally
+
+## **1️⃣ Clone the Repository**
+
+```bash
+git clone https://github.com/akashsinghsagar/SMS-Spam-Detector.git
+cd SMS-Spam-Detector
+```
+
+## **2️⃣ Install Dependencies**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### ▶️ Start the app
+## **3️⃣ Run Streamlit App**
 
 ```bash
 streamlit run app.py
@@ -132,44 +129,48 @@ streamlit run app.py
 
 # 📉 Exploratory Data Analysis (EDA)
 
-Included in the notebook:
+The notebook includes:
 
-* Class imbalance pie chart
-* Word counts, sentence counts
-* Histograms per class
-* Pairplots
-* Correlation heatmap
-* WordClouds for Spam & Ham
-* Top 30 frequent words (Spam & Ham)
+* Spam vs Ham distribution
+* WordClouds (Spam & Ham)
+* Message length analysis
+* Frequent word analysis
+* Correlation & patterns
+* Training–validation accuracy
 
 ---
 
-# 💾 Saving the Model
+# 💾 Re-training the Model
 
-```python
-pickle.dump(tfidf, open('vectorizer.pkl', 'wb'))
-pickle.dump(mnb, open('model.pkl', 'wb'))
+To retrain the model using the dataset:
+
+```bash
+python sms-spam-classifier/train_model.py
 ```
 
----
+This will regenerate:
 
+* `model.pkl`
+* `vectorizer.pkl`
+
+---
+<img width="1919" height="916" alt="Screenshot 2025-11-20 202248" src="https://github.com/user-attachments/assets/dfced8d6-c693-41b8-80c2-3cc1e9b928ef" />
+---
 # 🔮 Future Improvements
 
-* Deploy on Streamlit Cloud / Render
-* Add LSTM-based deep learning classifier
-* Add support for multi-language SMS
-* Improve UI/UX
-* Add REST API using FastAPI
-
----
-
-# 📜 License
-
-This project is licensed under the **MIT License**.
+* Add deep learning model (LSTM / Bi-LSTM)
+* Support for multiple languages
+* Add email phishing detection
+* Deploy via FastAPI REST API
+* Modern UI upgrade for Streamlit
 
 ---
 
 # 👨‍💻 Developed By
 
-**Akash Singh Sagar**
+### **Akash Singh Sagar**
 
+ML • NLP • Data Science • Python
+Building practical, real-world AI applications.
+
+”** and I’ll make it.
