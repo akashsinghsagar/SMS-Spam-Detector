@@ -1,0 +1,11 @@
+streamlit==1.51.0
+scikit-learn==1.7.2
+pandas==2.2.3
+nltk==3.9.2
+numpy==2.2.4
+scipy==1.15.2
+
+# Optional (installed as dependencies of the above, listed for clarity)
+# joblib
+# regex
+# tqdm
