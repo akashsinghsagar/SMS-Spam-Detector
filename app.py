@@ -46,14 +46,17 @@ def transform_text(text):
 
 # --- Load Model + Vectorizer ---
 BASE_DIR = os.path.dirname(__file__)
-VECT_PATH = os.path.join(BASE_DIR, 'vectorizer.pkl')
-MODEL_PATH = os.path.join(BASE_DIR, 'model.pkl')
+MODEL_DIR = os.path.join(BASE_DIR, "models")
+
+VECT_PATH = os.path.join(MODEL_DIR, 'vectorizer.pkl')
+MODEL_PATH = os.path.join(MODEL_DIR, 'model.pkl')
 
 with open(VECT_PATH, 'rb') as f:
     tfidf = pickle.load(f)
 
 with open(MODEL_PATH, 'rb') as f:
     model = pickle.load(f)
+
 
 
 # --- Streamlit UI ---
