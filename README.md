@@ -176,4 +176,3 @@ This will regenerate:
 ML • NLP • Data Science • Python
 Building practical, real-world AI applications.
 
-”** and I’ll make it.
