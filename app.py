@@ -3,7 +3,7 @@ import streamlit as st
 import pickle
 import string
 import nltk
-from nltk.stem.porter import PorterStemmer
+from nltk.stem import PorterStemmer
 
 ps = PorterStemmer()
 
@@ -22,8 +22,9 @@ ensure_nltk_resources()
 
 # cache stopwords
 try:
-    from nltk.corpus import stopwords
-    STOPWORDS = set(stopwords.words('english'))
+    import importlib
+    corp = importlib.import_module('nltk.corpus')
+    STOPWORDS = set(corp.stopwords.words('english'))
 except Exception:
     STOPWORDS = set()
 
